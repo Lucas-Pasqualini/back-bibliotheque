@@ -1,0 +1,28 @@
+server.port: 8081
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: bookModule
+          uri: http://localhost:9010/
+          predicates:
+            - Path=/book/**
+        - id: commentModule
+          uri: http://localhost:9020/
+          predicates:
+            - Path=/comment/**
+        - id: customerModule
+          uri: http://localhost:9030/
+          predicates:
+            - Path=/customer/**
+
+
+  application:
+    name: gateway-app
+  boot:
+    admin:
+      client:
+          url: http://localhost:9000
+
+management.endpoints.web.exposure.include: health
