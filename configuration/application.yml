@@ -1,0 +1,6 @@
+
+server.forward-headers-strategy: native
+
+spring.boot.admin.client.url: http://localhost:9000
+
+management.endpoints.web.exposure.include: '*'
