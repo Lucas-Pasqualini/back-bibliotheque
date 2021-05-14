@@ -1,27 +1,33 @@
 package com.example.customer;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 
-import javax.persistence.*;
-import java.util.Set;
-
-@Entity
+@Getter
+@Setter
 @Data
-@NoArgsConstructor
-public class Customer {
+public class Customer implements Persistable<Integer> {
 
     @Id
-    private int id;
+    private Integer id;
     private String name;
     private int age;
 
-    /*@Column(unique = true)
-    private String login;
-    private String password;
-    private String category;
+    @Transient
+    private boolean newCustomer;
 
-    @OneToMany
-    @JoinColumn(name = "customer_id")
-    private Set<Book> borrow;*/
+    @Override
+    @Transient
+    public boolean isNew() {
+        return this.newCustomer || id == null;
+    }
+
+    public Customer setAsNew(){
+        this.newCustomer = true;
+        return this;
+    }
 }

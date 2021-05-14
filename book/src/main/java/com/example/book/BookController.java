@@ -1,15 +1,21 @@
 package com.example.book;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping(path="api/book")
+@RequestMapping(path="/api/book")
 public class BookController {
-    BookService bookService;
+
+    @Autowired
+    private BookService bookService;
+
+    @GetMapping
+    public Flux<Book> getBooks(){
+        return bookService.findAll();
+    }
 
     @GetMapping("/{id}")
     public Mono<Book> getBook(@PathVariable("id") Integer id) {
@@ -19,5 +25,20 @@ public class BookController {
     @GetMapping("/search/{title}")
     public Mono<Book> searchBook(@PathVariable("title") String title) {
         return bookService.findByTitle(title);
+    }
+
+    @PostMapping("/add")
+    public Mono<Book> addBook(@RequestBody Book book){
+        return bookService.addBook(book);
+    }
+
+    @DeleteMapping("/delete/{bookId}")
+    public void deleteBook(@PathVariable("bookId") int bookId) {
+        bookService.deleteBook(bookId);
+    }
+
+    @PutMapping("/update")
+    public Mono<Book> updateBook(@RequestBody Book book) {
+        return bookService.updateBook(book);
     }
 }

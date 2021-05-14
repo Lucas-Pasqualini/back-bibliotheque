@@ -1,20 +1,33 @@
 package com.example.book;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.domain.Persistable;
+import org.springframework.data.annotation.Transient;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
+@Getter
+@Setter
 @Data
-public class Book {
+public class Book implements Persistable<Integer> {
 
     @Id
-    private int id;
+    private Integer id;
     private String title;
     private String category;
     private String author;
     private String cover;
+
+    @Transient
+    private boolean newBook;
+
+    @Override
+    @Transient
+    public boolean isNew() {
+        return this.newBook || id == null;
+    }
+
+    public Book setAsNew(){
+        this.newBook = true;
+        return this;
+    }
 }

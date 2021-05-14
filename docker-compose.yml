@@ -10,6 +10,8 @@ services:
       MYSQL_DATABASE: bibliotheque
       MYSQL_USER: biblioUser
       MYSQL_PASSWORD: mdp123
+    ports:
+      - 3306:3306
     volumes:
       - ./bdd:/docker-entrypoint-initdb.d
 

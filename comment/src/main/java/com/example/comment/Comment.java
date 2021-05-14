@@ -1,27 +1,31 @@
 package com.example.comment;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-@Entity
+@Getter
+@Setter
 @Data
-@NoArgsConstructor
-public class Comment {
+public class Comment implements Persistable<Integer> {
 
     @Id
-    private int id;
+    private Integer id;
     private String title;
     private String content;
-    /*@ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id")
-    private Book book;*/
+    @Transient
+    private boolean newComment;
+
+    @Override
+    @Transient
+    public boolean isNew() {
+        return this.newComment || id == null;
+    }
+
+    public Comment setAsNew(){
+        this.newComment = true;
+        return this;
+    }
 }
