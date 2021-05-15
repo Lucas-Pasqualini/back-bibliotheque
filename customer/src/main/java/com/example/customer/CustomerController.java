@@ -27,17 +27,17 @@ public class CustomerController {
         return customerService.findByTitle(title);
     }
 
-    @PostMapping("/add")
+    @PostMapping("")
     public Mono<Customer> addCustomer(@RequestBody Customer customer){
         return customerService.addCustomer(customer);
     }
 
-    @DeleteMapping("/delete/{customerId}")
-    public void deleteCustomer(@PathVariable("customerId") int customer) {
-        customerService.deleteCustomer(customer);
+    @DeleteMapping("/{customerId}")
+    public Mono<Void> deleteCustomer(@PathVariable("customerId") int customerId) {
+        return customerService.deleteCustomer(customerId);
     }
 
-    @PutMapping("/update")
+    @PutMapping("")
     public Mono<Customer> updateCustomer(@RequestBody Customer customer) {
         return customerService.updateCustomer(customer);
     }

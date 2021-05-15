@@ -28,11 +28,11 @@ public class BookService {
     }
 
     public Mono<Book> addBook(Book book) {
-        return bookRepository.save(book);
+        return bookRepository.save(book.setAsNew());
     }
 
-    public void deleteBook(int bookId) {
-        bookRepository.deleteById(bookId);
+    public Mono<Void> deleteBook(int bookId) {
+        return bookRepository.deleteById(bookId);
     }
 
     public Mono<Book> updateBook(Book book) {

@@ -3,11 +3,13 @@ package com.example.comment;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class CommentService {
 
     @Autowired
@@ -26,11 +28,11 @@ public class CommentService {
     }
 
     public Mono<Comment> addComment(Comment comment) {
-        return commentRepository.save(comment);
+        return commentRepository.save(comment.setAsNew());
     }
 
-    public void deleteComment(int bookId) {
-        commentRepository.deleteById(bookId);
+    public Mono<Void> deleteComment(int bookId) {
+        return commentRepository.deleteById(bookId);
     }
 
     public Mono<Comment> updateComment(Comment comment) {

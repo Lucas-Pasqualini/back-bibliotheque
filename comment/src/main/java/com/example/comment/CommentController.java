@@ -27,17 +27,17 @@ public class CommentController {
         return commentService.findByTitle(title);
     }
 
-    @PostMapping("/add")
+    @PostMapping("")
     public Mono<Comment> addComment(@RequestBody Comment comment){
         return commentService.addComment(comment);
     }
 
-    @DeleteMapping("/delete/{commentId}")
-    public void deleteComment(@PathVariable("commentId") int commentId) {
-        commentService.deleteComment(commentId);
+    @DeleteMapping("/{commentId}")
+    public Mono<Void> deleteComment(@PathVariable("commentId") int commentId) {
+        return commentService.deleteComment(commentId);
     }
 
-    @PutMapping("/update")
+    @PutMapping("")
     public Mono<Comment> updateComment(@RequestBody Comment comment) {
         return commentService.updateComment(comment);
     }

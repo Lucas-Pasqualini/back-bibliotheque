@@ -28,11 +28,11 @@ public class CustomerService {
     }
 
     public Mono<Customer> addCustomer(Customer customer) {
-        return customerRepository.save(customer);
+        return customerRepository.save(customer.setAsNew());
     }
 
-    public void deleteCustomer(int customerId) {
-        customerRepository.deleteById(customerId);
+    public Mono<Void> deleteCustomer(int customerId) {
+        return customerRepository.deleteById(customerId);
     }
 
     public Mono<Customer> updateCustomer(Customer customer) {

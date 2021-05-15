@@ -18,7 +18,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public Mono<Book> getBook(@PathVariable("id") Integer id) {
+    public Mono<Book> getBook(@PathVariable("id") int id) {
         return bookService.findById(id);
     }
 
@@ -27,17 +27,17 @@ public class BookController {
         return bookService.findByTitle(title);
     }
 
-    @PostMapping("/add")
+    @PostMapping("")
     public Mono<Book> addBook(@RequestBody Book book){
         return bookService.addBook(book);
     }
 
-    @DeleteMapping("/delete/{bookId}")
-    public void deleteBook(@PathVariable("bookId") int bookId) {
-        bookService.deleteBook(bookId);
+    @DeleteMapping("/{bookId}")
+    public Mono<Void> deleteBook(@PathVariable("bookId") int bookId) {
+        return bookService.deleteBook(bookId);
     }
 
-    @PutMapping("/update")
+    @PutMapping("")
     public Mono<Book> updateBook(@RequestBody Book book) {
         return bookService.updateBook(book);
     }
