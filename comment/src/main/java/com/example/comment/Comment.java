@@ -14,6 +14,8 @@ public class Comment implements Persistable<Integer> {
     private Integer id;
     private String title;
     private String content;
+    private String customer_id;
+    private String book_id;
 
     @Transient
     private boolean newComment;

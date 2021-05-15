@@ -16,6 +16,9 @@ public class Customer implements Persistable<Integer> {
     private Integer id;
     private String name;
     private int age;
+    private String password;
+    private String login;
+    private String category;
 
     @Transient
     private boolean newCustomer;
