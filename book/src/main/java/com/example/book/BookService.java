@@ -28,7 +28,7 @@ public class BookService {
     }
 
     public Mono<Book> addBook(Book book) {
-        if(!book.getCategory().equals("adulte") || !book.getCategory().equals("adolescent") || !book.getCategory().equals("enfant")) {
+        if (!book.getCategory().equals("adulte") && !book.getCategory().equals("adolescent") && !book.getCategory().equals("enfant")) {
             book.setCategory("adulte");
         }
         return bookRepository.save(book.setAsNew());
