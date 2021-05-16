@@ -20,7 +20,7 @@ public class CustomerService {
     }
 
     public Mono<Customer> findByTitle(String name){
-        return customerRepository.findByName(name);
+        return customerRepository.findCustomerByName(name);
     }
 
     public Flux<Customer> findAll() {

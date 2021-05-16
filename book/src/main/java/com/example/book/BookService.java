@@ -20,7 +20,7 @@ public class BookService {
     }
 
     public Mono<Book> findByTitle(String title){
-        return bookRepository.findByTitle(title);
+        return bookRepository.findBookByTitle(title);
     }
 
     public Flux<Book> findAll() {
@@ -28,6 +28,9 @@ public class BookService {
     }
 
     public Mono<Book> addBook(Book book) {
+        if(!book.getCategory().equals("adulte") || !book.getCategory().equals("adolescent") || !book.getCategory().equals("enfant")) {
+            book.setCategory("adulte");
+        }
         return bookRepository.save(book.setAsNew());
     }
 

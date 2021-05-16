@@ -20,7 +20,7 @@ public class CommentService {
     }
 
     public Mono<Comment> findByTitle(String title){
-        return commentRepository.findByTitle(title);
+        return commentRepository.findCommentByTitle(title);
     }
 
     public Flux<Comment> findAll() {

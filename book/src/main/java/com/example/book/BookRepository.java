@@ -4,5 +4,5 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Mono;
 
 public interface BookRepository extends ReactiveCrudRepository<Book, Integer> {
-    Mono<Book> findByTitle(String title);
+    Mono<Book> findBookByTitle(String title);
 }
